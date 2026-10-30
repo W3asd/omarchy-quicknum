@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / AST files
+__pycache__/
+*.py[cod]
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Build and scratch files
+*.tmp
+*.log

@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# omarchy:summary=Control the Omarchy QuickNum menu (toggle / summon / close / refresh)
+# omarchy:args=[toggle|summon|close|refresh|ping] [route]
+# omarchy:examples=omarchy-quicknum | omarchy-quicknum toggle system | omarchy-quicknum summon style.theme | omarchy-quicknum refresh
+
+set -euo pipefail
+
+verb="${1-toggle}"
+route="${2-root}"
+
+menu_payload() {
+  jq -nc --arg menu "$1" '{ menu: $menu }'
+}
+
+case "$verb" in
+  toggle)
+    exec omarchy-shell shell toggle quicknum "$(menu_payload "$route")"
+    ;;
+  summon)
+    exec omarchy-shell shell summon quicknum "$(menu_payload "$route")"
+    ;;
+  close)
+    exec omarchy-shell shell hide quicknum
+    ;;
+  refresh | ping)
+    exec omarchy-shell shell call quicknum "$verb" "{}"
+    ;;
+  -h | --help | help)
+    cat <<USAGE
+Usage: omarchy-quicknum [verb] [route]
+
+Verbs:
+  toggle [route]   Open the QuickNum menu at <route>, or close it if already open. Default verb.
+  summon [route]   Always open the QuickNum menu (no close-if-visible toggle).
+  close            Close the menu if visible.
+  refresh          Re-parse the menu JSONC files.
+  ping             Health check.
+
+Route is an item id (e.g. setup.power) or alias (e.g. power). Defaults to "root".
+USAGE
+    exit 0
+    ;;
+  *)
+    echo "omarchy-quicknum: unknown verb '$verb'. Try 'omarchy-quicknum --help'." >&2
+    exit 2
+    ;;
+esac
