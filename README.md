@@ -56,7 +56,7 @@ omarchy-quicknum/
 ### Methode 1: Über den Omarchy Plugin-Manager (Empfohlen)
 
 ```bash
-omarchy plugin add https://github.com/omarchy-community/omarchy-quicknum.git --enable --yes
+omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git --enable --yes
 ```
 
 ### Methode 2: Manuelle Installation / Lokale Entwicklung
@@ -65,7 +65,7 @@ Klonen oder kopieren Sie dieses Repository nach `~/.config/omarchy/plugins/quick
 
 ```bash
 # Repository klonen
-git clone https://github.com/omarchy-community/omarchy-quicknum.git ~/.config/omarchy/plugins/quicknum
+git clone https://github.com/W3asd/omarchy-quicknum.git ~/.config/omarchy/plugins/quicknum
 
 # Plugin in der Shell neu einlesen und aktivieren
 omarchy-shell shell rescanPlugins
