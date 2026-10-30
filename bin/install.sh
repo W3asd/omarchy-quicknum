@@ -29,3 +29,4 @@ if command -v omarchy-shell >/dev/null 2>&1; then
 fi
 
 echo "=== Done! Press Super + Space to summon QuickNum. ==="
+

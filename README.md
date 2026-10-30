@@ -123,3 +123,4 @@ Prüft:
 
 Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
 Open-Source für die Omarchy-, Hyprland- und Arch Linux-Community.
+
