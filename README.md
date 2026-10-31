@@ -38,7 +38,7 @@ rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badg
 
 | Omarchy | Status |
 |---|---|
-| 4.0.6 | tested (3.0.0) |
+| 4.0.6 | tested (3.0.1) |
 | 4.0.x | expected to work; the Apps workaround is active ([details](docs/known-issues.md)) |
 | ≥ 4.5 | not tested yet; the upstream fix there should make the workaround inactive |
 

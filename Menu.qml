@@ -146,9 +146,16 @@ Item {
     root.doneFile = ""
 
     if (selection === null || selection === undefined) {
-      resultProc.command = ["bash", "-c", ": > " + Util.shellQuote(activeDoneFile)]
+      resultProc.pendingSelection = null
+      resultProc.command = ["bash", "-c", ": > \"$1\"", "quicknum-result", activeDoneFile]
     } else {
-      resultProc.command = ["bash", "-c", "printf '%s\\n' " + Util.shellQuote(selection) + " > " + Util.shellQuote(activeSelectionFile) + "; : > " + Util.shellQuote(activeDoneFile)]
+      // QuickNum: the selection goes over stdin, never argv, so other local
+      // accounts cannot read typed input from the process list (marketplace
+      // review of the submission). The file paths are passed as arguments.
+      // One line is the whole value: typed input never holds a newline (Enter
+      // submits), and select rows are single lines of the caller's options.
+      resultProc.pendingSelection = String(selection)
+      resultProc.command = ["bash", "-c", "IFS= read -r value; printf '%s\\n' \"$value\" > \"$1\"; : > \"$2\"", "quicknum-result", activeSelectionFile, activeDoneFile]
     }
     resultProc.running = true
   }
@@ -972,6 +979,14 @@ Item {
 
   Process {
     id: resultProc
+    // Set by finishRequest(); written to stdin and cleared once the shell starts.
+    property var pendingSelection: null
+    stdinEnabled: true
+    onStarted: {
+      if (pendingSelection === null) return
+      write(pendingSelection + "\n")
+      pendingSelection = null
+    }
     onExited: {
       if (root.applySerial === root.requestSerial)
         root.opened = false

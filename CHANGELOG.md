@@ -6,6 +6,21 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-10-31
+
+### Security
+
+- Text typed into an input dialog (and the chosen row of a select dialog) was
+  written to the result file through `bash -c "printf … '<value>' > file"`, so
+  the value appeared in the process arguments, where other local accounts can
+  read it. It now goes over stdin; only the file paths are arguments. Reported
+  in the marketplace review of the submission
+  ([omacom/omarchy-plugin-marketplace#13493](https://github.com/omacom/omarchy-plugin-marketplace/issues/13493)).
+  The code came unchanged from Omarchy's built-in menu, which still has it.
+  Tested on Omarchy 4.0.6: input, select and cancel, value with quotes, `$`
+  and umlauts arrives byte-exact.
+
+
 ### Fixed
 
 - README: right after `omarchy plugin add`, `omarchy plugin enable` can fail with
@@ -128,7 +143,8 @@ and the project uses [Semantic Versioning](https://semver.org/).
 - First release: menu overlay based on the built-in Omarchy menu, with
   direct selection via the number keys and numpad 1–9 and right-aligned number badges.
 
-[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/W3asd/omarchy-quicknum/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/W3asd/omarchy-quicknum/compare/v2.0.1...v3.0.0
 [2.0.1]: https://github.com/W3asd/omarchy-quicknum/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.2.0...v2.0.0

@@ -97,5 +97,6 @@ Expected differences in `Menu.qml` (as of Omarchy 4.0.6):
 - the text branch of `Keys.onPressed` ignores `Qt.KeypadModifier` (omacom/omarchy#14956)
 - card width `320` instead of `300`, and the chevron row layout next to the badge
 - the AppLibrary fallback (comment `Workaround`, see [known-issues.md](known-issues.md))
+- `finishRequest()` and `resultProc` pass the dialog result over stdin instead of `bash -c` arguments (security fix in 3.0.1)
 
 Any other difference comes from an Omarchy change that QuickNum has not picked up yet.
