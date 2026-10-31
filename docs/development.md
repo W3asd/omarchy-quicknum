@@ -63,6 +63,9 @@ in that case run `omarchy restart shell`. Shell log: `journalctl --user -b | gre
 
 ## Manual test checklist
 
+After testing on a new Omarchy version, update the "tested" version in the
+first README badge (both READMEs) and in the compatibility table.
+
 - [ ] `Super + Alt + Space` opens the menu; badges 1–9 are right-aligned
 - [ ] Number keys and numpad keys 1–9 run the matching row (empty search)
 - [ ] After typing a letter, number-row and numpad digits are added to the search

@@ -2,7 +2,8 @@
 
 [Deutsch](README.de.md) · **English**
 
-[![Omarchy Plugin](https://img.shields.io/badge/Omarchy-plugin-blue?style=flat-square)](https://omarchy.org)
+[![Omarchy 4 plugin, tested 4.0.6](https://img.shields.io/badge/Omarchy%204%20plugin-tested%204.0.6-blue?style=flat-square)](https://omarchy.org)
+[![Built with Quickshell and QML](https://img.shields.io/badge/built%20with-Quickshell%20%C2%B7%20QML-orange?style=flat-square)](https://quickshell.org)
 [![Release](https://img.shields.io/github/v/release/W3asd/omarchy-quicknum?style=flat-square)](https://github.com/W3asd/omarchy-quicknum/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![AI-generated](https://img.shields.io/badge/code-AI--generated-lightgrey?style=flat-square)](#ai-generated)
@@ -38,6 +39,9 @@ rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badg
 | 4.0.6 | tested (2.0.0) |
 | 4.0.x | expected to work; the Apps workaround is active ([details](docs/known-issues.md)) |
 | ≥ 4.5 | not tested yet; the upstream fix there should make the workaround inactive |
+
+QuickNum requires Omarchy 4. It does not work on plain Hyprland or Quickshell,
+because it uses the plugin interface, menu definitions and app library of `omarchy-shell`.
 
 Some problems come from Omarchy itself, not from QuickNum: the empty Apps list on 4.0.x, and a numpad that
 types nothing until NumLock is toggled. The [known issues](docs/known-issues.md#overview-omarchy-issues-that-affect-quicknum)

@@ -6,6 +6,13 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- README badges: "Omarchy 4 plugin · tested 4.0.6" and "built with Quickshell · QML"
+  replace the generic Omarchy badge. There is no separate Hyprland badge,
+  because QuickNum needs Omarchy and does not run on plain Hyprland. The
+  compatibility section now says so explicitly.
+
 ## [2.0.0] - 2026-10-31
 
 ### Added
