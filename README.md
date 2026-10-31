@@ -38,7 +38,7 @@ rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badg
 
 | Omarchy | Status |
 |---|---|
-| 4.0.6 | tested (2.0.1) |
+| 4.0.6 | tested (3.0.0) |
 | 4.0.x | expected to work; the Apps workaround is active ([details](docs/known-issues.md)) |
 | ≥ 4.5 | not tested yet; the upstream fix there should make the workaround inactive |
 
@@ -59,31 +59,34 @@ Review the code, then enable QuickNum. Enabling it switches off the built-in
 `omarchy.menu` and takes over its place in the bar (tested on Omarchy 4.0.6):
 
 ```bash
-omarchy plugin enable w3asd.quicknum
+omarchy plugin enable io.github.w3asd.quicknum
 ```
 
-Manual alternative: clone the repository to `~/.config/omarchy/plugins/w3asd.quicknum`,
+Manual alternative: clone the repository to `~/.config/omarchy/plugins/io.github.w3asd.quicknum`,
 run `omarchy-shell shell rescanPlugins`, then enable it as above. Or run `./bin/install.sh`
 from a clone somewhere else; it copies the files and enables the plugin.
 
-## Upgrading from 1.x
+## Upgrading from an older plugin id
 
-Version 2.0 renamed the plugin id from `quicknum` to `w3asd.quicknum`. Remove the old install, then install again:
+The plugin id changed twice before the first public release: `quicknum` (1.x),
+then `w3asd.quicknum` (2.x), now `io.github.w3asd.quicknum` (3.0). If you have
+an old install, remove it (use the id that `omarchy plugin list` shows), then
+install again:
 
 ```bash
-omarchy plugin disable quicknum
-omarchy plugin remove quicknum
+omarchy plugin disable w3asd.quicknum
+omarchy plugin remove w3asd.quicknum
 omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
-omarchy plugin enable w3asd.quicknum
+omarchy plugin enable io.github.w3asd.quicknum
 ```
 
 ## Uninstall / back to the built-in menu
 
 ```bash
-omarchy plugin disable w3asd.quicknum
+omarchy plugin disable io.github.w3asd.quicknum
 ```
 
-This switches the built-in `omarchy.menu` back on. `omarchy plugin remove w3asd.quicknum` also deletes the files.
+This switches the built-in `omarchy.menu` back on. `omarchy plugin remove io.github.w3asd.quicknum` also deletes the files.
 
 ## Keys
 
@@ -100,7 +103,7 @@ This switches the built-in `omarchy.menu` back on. `omarchy plugin remove w3asd.
 
 The existing Omarchy shortcuts open QuickNum, because its manifest declares
 `clonedFrom: "omarchy.menu"`. To bind it to another key anyway, call
-`omarchy-shell shell toggle w3asd.quicknum '{"menu":"root"}'` from `~/.config/hypr/bindings.lua`.
+`omarchy-shell shell toggle io.github.w3asd.quicknum '{"menu":"root"}'` from `~/.config/hypr/bindings.lua`.
 
 ## Settings
 
@@ -110,8 +113,8 @@ These properties are at the top of `Menu.qml`:
 > Editing `Menu.qml` is a local change to the plugin's git checkout. After that,
 > `omarchy plugin update` stops with "cannot fast-forward … you have local changes".
 > Put your edit aside first and re-apply it after the update:
-> `git -C ~/.config/omarchy/plugins/w3asd.quicknum stash`, then `omarchy plugin update w3asd.quicknum`,
-> then `git -C ~/.config/omarchy/plugins/w3asd.quicknum stash pop`.
+> `git -C ~/.config/omarchy/plugins/io.github.w3asd.quicknum stash`, then `omarchy plugin update io.github.w3asd.quicknum`,
+> then `git -C ~/.config/omarchy/plugins/io.github.w3asd.quicknum stash pop`.
 
 - `quickNumEnabled` (default `true`): turns number-key selection on or off.
 - `quickNumInSearch` (default `false`): with `false`, number keys select rows

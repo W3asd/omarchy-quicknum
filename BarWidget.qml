@@ -3,7 +3,7 @@ import qs.Ui
 
 BarWidget {
   id: root
-  moduleName: "w3asd.quicknum"
+  moduleName: "io.github.w3asd.quicknum"
 
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight
@@ -18,7 +18,7 @@ BarWidget {
     onPressed: function(button) {
       if (!root.bar) return
       if (button === Qt.RightButton) root.bar.run("xdg-terminal-exec")
-      else root.bar.run("omarchy-shell shell toggle w3asd.quicknum '{\"menu\":\"root\"}'")
+      else root.bar.run("omarchy-shell shell toggle io.github.w3asd.quicknum '{\"menu\":\"root\"}'")
     }
   }
 }

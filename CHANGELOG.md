@@ -6,6 +6,16 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-31
+
+### Changed
+
+- **Breaking:** the plugin id is now `io.github.w3asd.quicknum` instead of
+  `w3asd.quicknum`, the form the Omarchy plugin marketplace recommends. Plugin
+  ids are permanent on the marketplace, so this is settled before the first
+  public release. The README section "Upgrading from an older plugin id"
+  covers installs with `quicknum` or `w3asd.quicknum`.
+
 ## [2.0.1] - 2026-10-31
 
 ### Changed
@@ -111,7 +121,8 @@ and the project uses [Semantic Versioning](https://semver.org/).
 - First release: menu overlay based on the built-in Omarchy menu, with
   direct selection via the number keys and numpad 1–9 and right-aligned number badges.
 
-[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/W3asd/omarchy-quicknum/compare/v2.0.1...v3.0.0
 [2.0.1]: https://github.com/W3asd/omarchy-quicknum/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.1.0...v1.2.0

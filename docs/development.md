@@ -2,9 +2,9 @@
 
 ## Setup
 
-The installed plugin lives in `~/.config/omarchy/plugins/w3asd.quicknum/`. An
+The installed plugin lives in `~/.config/omarchy/plugins/io.github.w3asd.quicknum/`. An
 install made with `omarchy plugin add` is a git clone, so you can work directly
-in it. Alternatively remove that install (`omarchy plugin remove w3asd.quicknum`)
+in it. Alternatively remove that install (`omarchy plugin remove io.github.w3asd.quicknum`)
 and run `./bin/install.sh` from your own clone after each change; the script
 refuses to overwrite a git clone. Saving a file in the plugin directory reloads
 the plugin automatically.
@@ -15,10 +15,10 @@ disabling it switches `omarchy.menu` back on (verified on Omarchy 4.0.6):
 
 ```bash
 # test QuickNum
-omarchy plugin enable w3asd.quicknum
+omarchy plugin enable io.github.w3asd.quicknum
 
 # back to the built-in menu
-omarchy plugin disable w3asd.quicknum
+omarchy plugin disable io.github.w3asd.quicknum
 ```
 
 `menu` plugins are `keepLoaded`, so a running instance can survive a file
@@ -55,10 +55,10 @@ function debugApps() {
 
 ```bash
 omarchy restart shell
-omarchy-shell shell call w3asd.quicknum debugApps '{}'
-omarchy-shell shell summon w3asd.quicknum '{"menu":"apps"}'
-omarchy-shell shell call w3asd.quicknum debugApps '{}'
-omarchy-shell shell hide w3asd.quicknum
+omarchy-shell shell call io.github.w3asd.quicknum debugApps '{}'
+omarchy-shell shell summon io.github.w3asd.quicknum '{"menu":"apps"}'
+omarchy-shell shell call io.github.w3asd.quicknum debugApps '{}'
+omarchy-shell shell hide io.github.w3asd.quicknum
 ```
 
 A result of `unknown` means the function does not exist in the loaded instance;
