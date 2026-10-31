@@ -6,6 +6,13 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Documentation
+
+- Known issues: the dialog-result disclosure fixed in 3.0.1, with a link to
+  the open Omarchy pull request
+  [omacom/omarchy#15774](https://github.com/omacom/omarchy/pull/15774) that
+  fixes the same code in Omarchy's built-in menu.
+
 ## [3.0.1] - 2026-10-31
 
 ### Security

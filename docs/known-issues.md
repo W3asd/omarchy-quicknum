@@ -129,6 +129,24 @@ The numpad decimal key (`Delete` when NumLock is off) is not mapped.
 from `kb_options` in `~/.config/hypr/input.lua` makes the keymaps identical.
 Users report that this helps, but not always when several keyboards use different layouts.
 
+## Dialog results were visible in process arguments (fixed in 3.0.1)
+
+**Problem:** when a command used the menu as an input or select dialog,
+`finishRequest()` saved the result with
+`bash -c "printf '%s\n' '<value>' > <file>"`. The typed value was therefore part
+of the process arguments, readable by other local accounts in `/proc/<pid>/cmdline`,
+even though the result file itself is private. Shell quoting prevented injection,
+not disclosure.
+
+**Fix in QuickNum 3.0.1:** the value goes over stdin (`IFS= read -r`); only the
+file paths are process arguments. Reported in the marketplace review of the
+submission ([omacom/omarchy-plugin-marketplace#13493](https://github.com/omacom/omarchy-plugin-marketplace/issues/13493)).
+
+**Upstream:** Omarchy's built-in menu has the same code. Open pull request
+[omacom/omarchy#15774](https://github.com/omacom/omarchy/pull/15774) fixes it
+there by writing the result from inside the shell with `FileView`. Not merged as
+of 2026-10-31.
+
 ## Overview: Omarchy issues that affect QuickNum
 
 | Problem | Upstream | Status upstream (per issue thread) | In QuickNum |
@@ -136,6 +154,7 @@ Users report that this helps, but not always when several keyboards use differen
 | Third-party menus get `appLibrary: null`, Apps list empty | [#15617](https://github.com/omacom/omarchy/issues/15617) → #10661, fix [#13439](https://github.com/omacom/omarchy/pull/13439) | fixed for v4.5.0-rc1 | worked around (AppLibrary fallback) |
 | Numpad digits are dropped by the menu's modifier check | [#14956](https://github.com/omacom/omarchy/issues/14956) | fixed for v4.5.0-rc1 (#15508) | fixed in `Menu.qml` |
 | Qt's NumLock state out of sync (startup, suspend) | [#8552](https://github.com/omacom/omarchy/issues/8552), [#8176](https://github.com/omacom/omarchy/issues/8176), [#12438](https://github.com/omacom/omarchy/issues/12438) | open | worked around in the menu (1.2.0); lock screen: press NumLock twice |
+| Dialog result in process arguments | PR [#15774](https://github.com/omacom/omarchy/pull/15774) | open (PR) | fixed in 3.0.1 |
 | NumLock state lost when the keymap is re-sent (hover, lock screen) | [#8552](https://github.com/omacom/omarchy/issues/8552) (analysis in comments), lock screen PR #12667, polkit PR #10530 | open | worked around in the menu |
 
 The upstream status comes from replies in the Omarchy issue threads, mostly
