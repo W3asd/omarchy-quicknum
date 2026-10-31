@@ -38,7 +38,7 @@ direkt mit den Zifferntasten `1`–`9` (oder dem Ziffernblock) auswählst. Recht
 
 | Omarchy | Stand |
 |---|---|
-| 4.0.6 | getestet (2.0.0) |
+| 4.0.6 | getestet (2.0.1) |
 | 4.0.x | sollte funktionieren; der Apps-Workaround ist aktiv ([Details](docs/known-issues.md)) |
 | ≥ 4.5 | noch nicht getestet; der dortige Fix in Omarchy sollte den Workaround überflüssig machen |
 

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "w3asd.quicknum",
   "name": "Omarchy QuickNum",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "W3asd",
   "license": "MIT",
   "description": "Omarchy menu with direct 1-9 number-key selection and right-aligned number badges",
