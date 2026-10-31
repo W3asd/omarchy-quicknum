@@ -3,9 +3,9 @@
   "id": "quicknum",
   "name": "Omarchy QuickNum",
   "version": "1.0.0",
-  "author": "Omarchy Community",
+  "author": "W3asd",
   "license": "MIT",
-  "description": "Natives Menü-Overlay mit latenzfreier Ziffern-Direktsteuerung (1-9) und rechtsbündigen Indikatoren für Omarchy",
+  "description": "Omarchy menu with direct 1-9 number-key selection and right-aligned number badges",
   "kinds": [
     "menu",
     "bar-widget"
@@ -20,9 +20,8 @@
   },
   "barWidget": {
     "displayName": "Omarchy QuickNum",
-    "description": "Startet das Omarchy Anwendungsmenü mit QuickNum Direktsteuerung",
+    "description": "Opens the Omarchy menu with QuickNum number-key selection",
     "category": "Compositor",
     "allowMultiple": false
   }
 }
-

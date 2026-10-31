@@ -1,126 +1,109 @@
-# Omarchy QuickNum ⚡🔢
+# Omarchy QuickNum
 
-[![Omarchy Plugin](https://img.shields.io/badge/Omarchy-Quattro%20Plugin-blue?style=flat-square)](https://omarchy.org)
-[![Platform](https://img.shields.io/badge/Arch%20Linux-Hyprland-brightgreen?style=flat-square)](https://hyprland.org)
-[![Quickshell](https://img.shields.io/badge/Powered%20by-Quickshell-orange?style=flat-square)](https://quickshell.org)
+[Deutsch](README.de.md) · **English**
+
+[![Omarchy Plugin](https://img.shields.io/badge/Omarchy-plugin-blue?style=flat-square)](https://omarchy.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![AI-generated](https://img.shields.io/badge/code-AI--generated-lightgrey?style=flat-square)](#ai-generated)
 
-**Omarchy QuickNum** ist ein minimalistisches Open-Source-Plugin für [Omarchy](https://omarchy.org/) (Arch Linux & Hyprland). Es erweitert das native Anwendungs- und Befehlsmenü um eine latenzfreie Ziffern-Direktsteuerung (1 bis 9) mit exakt rechtsbündigen Indikatoren für kompromisslose tastaturbasierte Workflows.
+**QuickNum** is a plugin for [Omarchy](https://omarchy.org/). It replaces the
+built-in Omarchy menu with a version where you choose each of the first nine
+rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badges show the numbers.
 
----
+> [!NOTE]
+> <a id="ai-generated"></a>**This project is fully AI-generated.** The first version was created with
+> Google Antigravity. Bug fixes and documentation were done with Claude Code
+> (Anthropic). Each change is tested on a real Omarchy system, but the code
+> was not written by hand. Please keep this in mind and review the
+> code before you enable it. Plugins run unsandboxed inside `omarchy-shell`.
 
-## 🚀 Highlights & Funktionsweise
+## Features
 
-### 1. ⚡ Natives Overlay
-* Vollständig in die bestehende Quickshell- und IPC-Architektur von Omarchy integriert.
-* Startet latenzfrei beim Betätigen des Standard-Shortcuts **`SUPER + SPACE`** (oder über die Top-Bar).
-* Da es als `clonedFrom: "omarchy.menu"` deklariert ist, ersetzt es das Standardmenü nahtlos, ohne dass bestehende Hyprland-Bindings manuell umkonfiguriert werden müssen.
+- **Number keys and numpad `1`–`9`** run the matching row immediately, so you
+  can step through nested menus quickly (e.g. `3` → `1`).
+- **Right-aligned badges:** long titles are truncated with `…`, so the badges always line up.
+- **Search as usual:** typing letters filters the list, and the numbers follow the results.
+- **Drop-in replacement:** the manifest declares `clonedFrom: "omarchy.menu"`,
+  so existing shortcuts (`Super + Space`, `Super + Alt + Space`) open QuickNum
+  without any config changes.
 
-### 2. 🎯 Rechtsbündige Indikatoren (1 bis 9)
-* An jedem der ersten 9 Listeneinträge wird ein dezenter, typografisch optimierter Indikator platziert.
-* **Absolut saubere Ausrichtung:** Die Zahlenbadges sind fest am rechten Rand des Menüs verankert und bilden eine exakte vertikale Linie – unabhängig davon, wie lang der jeweilige Titel oder die Beschreibung ist.
-* Lange Texte werden automatisch mit Auslassungspunkten (`...`) trunkiert, sodass der Zahlenindikator niemals verdeckt oder verschoben wird.
-* Untermenü-Pfeile (`›`) und Badges fügen sich harmonisch in das Omarchy-Designsystem ein.
+## Compatibility
 
-### 3. ⌨️ Direktsteuerung per Tastatur & Numpad
-* **Einzeltasten-Ausführung:** Ein einfacher Druck auf eine Zifferntaste (`1`–`9`) oder das Ziffernpad (**Numpad**) wählt den entsprechenden Eintrag sofort aus und führt ihn unverzüglich aus – ganz ohne Maus oder zeitraubendes Navigieren mit den Pfeiltasten.
-* **Baum-Navigation im Schnellgang:** Durch das Drücken von Ziffernfolgen (z. B. `3` für *Power* ➔ `1` für *Lock Screen*) navigieren Sie in Millisekunden durch verschachtelte Menüstrukturen.
-* **Intelligente Suche:** Beim Tippen von Buchstaben filtert das Menü wie gewohnt. Die Ziffern 1–9 passen sich dynamisch den gefilterten Suchtreffern an.
+| Omarchy | Status |
+|---|---|
+| 4.0.6 | tested |
+| 4.0.x | expected to work; the Apps workaround is active ([details](docs/known-issues.md)) |
+| ≥ 4.5 | not tested yet; the upstream fix there should make the workaround inactive |
 
----
-
-## 📦 Repository-Struktur
-
-```
-omarchy-quicknum/
-├── manifest.json            # Omarchy Plugin-Manifest (Schema v1, clonedFrom: omarchy.menu)
-├── Menu.qml                 # Haupt-Overlay mit QuickNum Key-Handling & Layout
-├── QuickNumIndicator.qml    # Rechtsbündige Zahlen-Badges im Omarchy-Farbschema
-├── MenuModel.js             # High-Performance JSONC Parser & Search Engine
-├── BarWidget.qml            # Optionales Bar-Widget für die Omarchy-Leiste
-├── bin/
-│   ├── omarchy-quicknum     # CLI-Controller (toggle, summon, refresh, ping)
-│   └── install.sh           # Lokales Installations- & Aktivierungs-Skript
-├── hypr/
-│   └── quicknum.lua         # Hyprland-Konfigurationsvorlage für Custom Bindings
-├── tests/
-│   └── validate.sh          # Test- & Validierungs-Suite für CI/CD
-├── LICENSE                  # MIT-Lizenz
-└── README.md                # Dokumentation
-```
-
----
-
-## 📥 Installation
-
-### Methode 1: Über den Omarchy Plugin-Manager (Empfohlen)
+## Installation
 
 ```bash
-omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git --enable --yes
+omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
 ```
 
-### Methode 2: Manuelle Installation / Lokale Entwicklung
-
-Klonen oder kopieren Sie dieses Repository nach `~/.config/omarchy/plugins/quicknum`:
+Review the code, then switch from the built-in menu to QuickNum. Only one menu plugin should be active:
 
 ```bash
-# Repository klonen
-git clone https://github.com/W3asd/omarchy-quicknum.git ~/.config/omarchy/plugins/quicknum
-
-# Plugin in der Shell neu einlesen und aktivieren
-omarchy-shell shell rescanPlugins
+omarchy plugin disable omarchy.menu
 omarchy plugin enable quicknum
 ```
 
-Alternativ führen Sie einfach das mitgelieferte Installationsskript aus:
+Manual alternative: clone the repository to `~/.config/omarchy/plugins/quicknum`
+and run `omarchy-shell shell rescanPlugins`, or run `./bin/install.sh` from the repository.
+
+## Uninstall / back to the built-in menu
+
 ```bash
-./bin/install.sh
+omarchy plugin disable quicknum
+omarchy plugin enable omarchy.menu
 ```
 
----
+`omarchy plugin remove quicknum` also deletes the files.
 
-## 🎮 Tastatursteuerung & Shortcuts
+## Keys
 
-| Taste / Shortcut | Aktion |
+| Key | Action |
 | :--- | :--- |
-| **`SUPER + SPACE`** | Öffnet / schließt das QuickNum Menü (Standard-Binding) |
-| **`1` bis `9`** | Führt den jeweiligen Listeneintrag (1–9) sofort aus |
-| **Numpad `1` bis `9`** | Führt den Eintrag (1–9) auch während der aktiven Textsuche direkt aus |
-| **`A`–`Z`** | Filtert die Liste per Volltextsuche |
-| **`Enter` / `Return`** | Führt den aktuell markierten Eintrag aus |
-| **`Backspace` / `Links`** | Geht eine Menüebene zurück (wenn Suchfeld leer ist) |
-| **`Esc`** | Leert das Suchfeld oder schließt das Menü |
-| **`Pfeil Oben` / `Unten`** | Schrittweise Navigation in der Liste |
+| `Super + Space` / `Super + Alt + Space` | Open / close the menu |
+| `1`–`9`, numpad `1`–`9` | Run row 1–9 |
+| `A`–`Z` | Search |
+| `Enter` | Run the selected row |
+| `Backspace` / `Left` | Up one level (when the search is empty) |
+| `Esc` | Clear the search, then close the menu |
+| `Up` / `Down` | Move the selection |
 
----
+## Settings
 
-## ⚙️ Anpassungsmöglichkeiten
+These properties are at the top of `Menu.qml`:
 
-In `Menu.qml` stehen folgende Eigenschaften zur Feineinstellung bereit:
+- `quickNumEnabled` (default `true`): turns number-key selection on or off.
+- `quickNumInSearch` (default `true`): the number row selects even during a
+  search. Set it to `false` to type digits into a search ([why](docs/known-issues.md#digits-cannot-be-typed-into-the-search-open)).
+- `quickNumBadgeStyle` (default `"badge"`): `"badge"` or `"minimal"`.
 
-* `quickNumEnabled` (Standard: `true`): Schaltet die Ziffernsteuerung ein oder aus.
-* `quickNumInSearch` (Standard: `true`): Ziffern 1–9 lösen auch bei gefilterten Treffern sofort die Aktion aus.
-* `quickNumBadgeStyle` (Standard: `"badge"`): Wählbar zwischen `"badge"` (dezente Box mit Rand) und `"minimal"` (reine Ziffer ohne Rahmen).
+## Repository layout
 
----
-
-## 🧪 Validierung & Tests
-
-Das Repository enthält automatisierte Tests zur Verifizierung der Konformität mit dem Omarchy Plugin-Standard:
-
-```bash
-./tests/validate.sh
+```
+manifest.json          Omarchy plugin manifest (clonedFrom: omarchy.menu)
+Menu.qml               Menu, based on Omarchy's built-in menu, plus QuickNum
+MenuModel.js           Unchanged copy of Omarchy's menu model (4.0.6)
+QuickNumIndicator.qml  Number badges
+BarWidget.qml          Optional bar button
+bin/install.sh         Local install script
+bin/omarchy-quicknum   CLI helper (toggle, summon, close, refresh, ping); not installed to PATH
+hypr/quicknum.lua      Example keybindings (template only, does nothing by itself)
+tests/validate.sh      Manifest and syntax checks
+docs/                  Known issues and development notes
 ```
 
-Prüft:
-* Manifest-Schema über `omarchy plugin validate`
-* Existenz aller geforderten EntryPoints
-* Validität von JSON und JavaScript-Syntax
+## Documentation
 
----
+- [Known issues](docs/known-issues.md)
+- [Development and testing](docs/development.md)
+- [Changelog](CHANGELOG.md)
+- [Contributing](CONTRIBUTING.md)
 
-## 📄 Lizenz
+## License
 
-Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
-Open-Source für die Omarchy-, Hyprland- und Arch Linux-Community.
-
+[MIT](LICENSE). `Menu.qml` and `MenuModel.js` are derived from
+[Omarchy](https://github.com/omacom/omarchy) (MIT, © David Heinemeier Hansson).

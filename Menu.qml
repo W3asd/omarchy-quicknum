@@ -83,7 +83,14 @@ Item {
 
   // Shared application engine (entries, hidden filters, icons, launch,
   // removal), owned by the shell and also used by the standalone launcher.
-  readonly property var appLibrary: root.shell ? root.shell.appLibrary : null
+  readonly property var hostAppLibrary: root.shell ? root.shell.appLibrary : null
+  // Workaround: Omarchy 4.0.x hands third-party menu plugins a null
+  // appLibrary, so the Apps submenu stays empty (omacom/omarchy#15617,
+  // duplicate of #10661; fixed upstream by #13439 for v4.5.0-rc1). Load the
+  // shell's own AppLibrary only while the host provides none; the host's
+  // facade always wins. Remove once the minimum supported Omarchy has the fix.
+  readonly property var appLibrary: root.hostAppLibrary || fallbackAppLibrary.item
+  onAppLibraryChanged: if (root.providersLoaded["apps"]) root.mergeAppRows()
   property bool deleteConfirmOpen: false
   property var deleteTarget: null
   onOpenedChanged: if (!opened) { deleteConfirmOpen = false; deleteTarget = null }
@@ -933,6 +940,14 @@ Item {
   PointerMoveGate {
     id: pointerGate
     referenceItem: card
+  }
+
+  // See appLibrary above. A missing or changed AppLibrary.qml leaves the
+  // Loader empty, so the menu runs without apps instead of failing.
+  Loader {
+    id: fallbackAppLibrary
+    active: !root.hostAppLibrary && root.omarchyPath !== ""
+    source: active ? root.omarchyPath + "/shell/services/AppLibrary.qml" : ""
   }
 
   Connections {
