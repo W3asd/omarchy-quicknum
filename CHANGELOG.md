@@ -6,6 +6,13 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- README: right after `omarchy plugin add`, `omarchy plugin enable` can fail with
+  "is not known" because Omarchy is still scanning. The upgrade steps now use
+  `omarchy plugin add … --enable`, which waits, and the installation section
+  explains the message.
+
 ## [3.0.0] - 2026-10-31
 
 ### Changed

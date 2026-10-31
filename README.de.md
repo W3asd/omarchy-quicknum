@@ -55,12 +55,16 @@ Ziffernblock, der sich verhält, als wäre Num-Lock aus. QuickNum umgeht beides 
 omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
 ```
 
-Prüfe den Code und schalte QuickNum dann ein. Dabei wird das eingebaute
+`omarchy plugin add` fragt, ob das Plugin gleich eingeschaltet werden soll. Willst du
+erst den Code prüfen, antworte mit Nein und schalte es danach ein. Dabei wird das eingebaute
 `omarchy.menu` automatisch ausgeschaltet, und QuickNum übernimmt seinen Platz in der Leiste (getestet mit Omarchy 4.0.6):
 
 ```bash
 omarchy plugin enable io.github.w3asd.quicknum
 ```
+
+Meldet der Befehl, das Plugin sei „not known“, ist Omarchy mit dem Einlesen noch nicht
+fertig; warte eine Sekunde und führe ihn noch einmal aus.
 
 Manuell: Klone das Repository nach `~/.config/omarchy/plugins/io.github.w3asd.quicknum`, führe
 `omarchy-shell shell rescanPlugins` aus und schalte es dann wie oben ein. Oder starte `./bin/install.sh`
@@ -76,8 +80,7 @@ zeigt) und installiere neu:
 ```bash
 omarchy plugin disable w3asd.quicknum
 omarchy plugin remove w3asd.quicknum
-omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
-omarchy plugin enable io.github.w3asd.quicknum
+omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git --enable
 ```
 
 ## Deinstallieren / zurück zum eingebauten Menü
