@@ -8,7 +8,7 @@ account. A maintainer has not confirmed this yet.
 
 ### Symptom
 
-With QuickNum enabled, `Super + Alt + Space` → **Apps** shows an empty list,
+With QuickNum enabled, the **Apps** list (`Super + Space` → Apps, or `Super + Alt + Space`) is empty,
 and application search finds nothing. The built-in `omarchy.menu` lists the
 apps normally.
 
@@ -74,19 +74,22 @@ as a search contains text, every digit (number row and numpad) is typed into it.
 A search still cannot *start* with a digit, because on an empty search
 `1`–`9` select a row.
 
-## Numpad types nothing until NumLock is toggled (Omarchy/Qt, not fixable here)
+## Numpad types nothing until NumLock is toggled (Omarchy/Qt)
 
 **Symptom:** NumLock is on (LED lit, `hyprctl devices` shows `numLock: true`),
-but numpad keys select nothing and type nothing in the menu. After you press
-NumLock off and on again, the numpad works.
+but in `omarchy-shell` surfaces (menu, lock screen, polkit dialog) the numpad
+types nothing. After you press NumLock off and on again, it works.
 
-**Cause:** Qt does not read the system NumLock state at startup
-([QTBUG-32687](https://bugreports.qt.io/browse/QTBUG-32687)). It delivers the
-NumLock-off keys (`End`, `Down`, …) without text. This affects every text field
-of `omarchy-shell` (menu, lock screen, polkit dialog), not only QuickNum. A
-plugin cannot fix this.
+**Cause:** Qt's NumLock state is out of sync with the compositor, so Qt delivers
+the NumLock-off keys (`End`, `Down`, …) without text. The issue was first
+attributed to Qt not reading NumLock at startup
+([QTBUG-32687](https://bugreports.qt.io/browse/QTBUG-32687)). Later comments
+point to keymaps being re-sent without a following NumLock state (see the next
+section).
 
-**Workaround:** press NumLock twice after login, or after the shell restarts.
+**In QuickNum:** since 1.2.0 the menu reads these keys as digits, so this does
+not affect QuickNum. The lock screen and the polkit dialog are Omarchy code;
+QuickNum cannot change them. There, press NumLock twice.
 
 **Upstream:** [omacom/omarchy#8552](https://github.com/omacom/omarchy/issues/8552)
 (still reproducible on 4.5.0-rc2 according to a comment),
@@ -132,7 +135,7 @@ Users report that this helps, but not always when several keyboards use differen
 |---|---|---|---|
 | Third-party menus get `appLibrary: null`, Apps list empty | [#15617](https://github.com/omacom/omarchy/issues/15617) → #10661, fix [#13439](https://github.com/omacom/omarchy/pull/13439) | fixed for v4.5.0-rc1 | worked around (AppLibrary fallback) |
 | Numpad digits are dropped by the menu's modifier check | [#14956](https://github.com/omacom/omarchy/issues/14956) | fixed for v4.5.0-rc1 (#15508) | fixed in `Menu.qml` |
-| Qt ignores NumLock at startup | [#8552](https://github.com/omacom/omarchy/issues/8552), [#8176](https://github.com/omacom/omarchy/issues/8176) | open | not fixable; toggle NumLock |
+| Qt's NumLock state out of sync (startup, suspend) | [#8552](https://github.com/omacom/omarchy/issues/8552), [#8176](https://github.com/omacom/omarchy/issues/8176), [#12438](https://github.com/omacom/omarchy/issues/12438) | open | worked around in the menu (1.2.0); lock screen: press NumLock twice |
 | NumLock state lost when the keymap is re-sent (hover, lock screen) | [#8552](https://github.com/omacom/omarchy/issues/8552) (analysis in comments), lock screen PR #12667, polkit PR #10530 | open | worked around in the menu |
 
 The upstream status comes from replies in the Omarchy issue threads, mostly

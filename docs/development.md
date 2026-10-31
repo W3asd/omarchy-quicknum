@@ -2,9 +2,12 @@
 
 ## Setup
 
-The installed plugin lives in `~/.config/omarchy/plugins/w3asd.quicknum/`. During
-development, copy changed files there (or run `./bin/install.sh`). Saving a file
-in that directory reloads the plugin automatically.
+The installed plugin lives in `~/.config/omarchy/plugins/w3asd.quicknum/`. An
+install made with `omarchy plugin add` is a git clone, so you can work directly
+in it. Alternatively remove that install (`omarchy plugin remove w3asd.quicknum`)
+and run `./bin/install.sh` from your own clone after each change; the script
+refuses to overwrite a git clone. Saving a file in the plugin directory reloads
+the plugin automatically.
 
 QuickNum and `omarchy.menu` both have kind `menu`. Because QuickNum declares
 `clonedFrom: "omarchy.menu"`, enabling it switches `omarchy.menu` off and
@@ -66,7 +69,8 @@ in that case run `omarchy restart shell`. Shell log: `journalctl --user -b | gre
 After testing on a new Omarchy version, update the "tested" version in the
 first README badge (both READMEs) and in the compatibility table.
 
-- [ ] `Super + Alt + Space` opens the menu; badges 1–9 are right-aligned
+- [ ] `Super + Space` opens the menu; badges 1–9 are right-aligned
+- [ ] `Super + Alt + Space` opens the Apps list directly
 - [ ] Number keys and numpad keys 1–9 run the matching row (empty search)
 - [ ] After typing a letter, number-row and numpad digits are added to the search
 - [ ] Numpad still selects after hovering another window with the mouse (NumLock desync)

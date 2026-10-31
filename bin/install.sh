@@ -43,4 +43,4 @@ if omarchy plugin list | grep -qE '^omarchy\.menu +enabled'; then
   echo "      omarchy plugin disable omarchy.menu"
 fi
 
-echo "=== Done. Open the menu with Super + Alt + Space. ==="
+echo "=== Done. Open the menu with Super + Space. ==="

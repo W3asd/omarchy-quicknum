@@ -12,7 +12,9 @@
 built-in Omarchy menu with a version where you choose each of the first nine
 rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badges show the numbers.
 
-![QuickNum menu with number badges 1–9](docs/screenshot.png)
+![QuickNum menu with number badges 1–9](preview.png)
+
+<sub>Background: the [Shan Shui](https://github.com/zednaked/omarchy-shanshui) plugin, a procedurally generated landscape.</sub>
 
 > [!NOTE]
 > <a id="ai-generated"></a>**This project is fully AI-generated.** The first version was created with
@@ -44,8 +46,8 @@ QuickNum requires Omarchy 4. It does not work on plain Hyprland or Quickshell,
 because it uses the plugin interface, menu definitions and app library of `omarchy-shell`.
 
 Some problems come from Omarchy itself, not from QuickNum: the empty Apps list on 4.0.x, and a numpad that
-types nothing until NumLock is toggled. The [known issues](docs/known-issues.md#overview-omarchy-issues-that-affect-quicknum)
-list them with links to the Omarchy issues.
+acts as if NumLock were off. QuickNum works around both inside its menu. The
+[known issues](docs/known-issues.md#overview-omarchy-issues-that-affect-quicknum) list them with links to the Omarchy issues.
 
 ## Installation
 
@@ -60,8 +62,9 @@ Review the code, then enable QuickNum. Enabling it switches off the built-in
 omarchy plugin enable w3asd.quicknum
 ```
 
-Manual alternative: clone the repository to `~/.config/omarchy/plugins/w3asd.quicknum`
-and run `omarchy-shell shell rescanPlugins`, or run `./bin/install.sh` from the repository.
+Manual alternative: clone the repository to `~/.config/omarchy/plugins/w3asd.quicknum`,
+run `omarchy-shell shell rescanPlugins`, then enable it as above. Or run `./bin/install.sh`
+from a clone somewhere else; it copies the files and enables the plugin.
 
 ## Upgrading from 1.x
 
@@ -86,7 +89,8 @@ This switches the built-in `omarchy.menu` back on. `omarchy plugin remove w3asd.
 
 | Key | Action |
 | :--- | :--- |
-| `Super + Space` / `Super + Alt + Space` | Open / close the menu |
+| `Super + Space` | Open / close the menu |
+| `Super + Alt + Space` | Open the Apps list directly |
 | `1`–`9`, numpad `1`–`9` | Run row 1–9 (while the search is empty); the numpad works even if NumLock is out of sync ([details](docs/known-issues.md#numpad-acts-as-if-numlock-were-off-after-hovering-a-window-worked-around)) |
 | `A`–`Z`, then also `0`–`9` | Search |
 | `Enter` | Run the selected row |
@@ -101,6 +105,13 @@ The existing Omarchy shortcuts open QuickNum, because its manifest declares
 ## Settings
 
 These properties are at the top of `Menu.qml`:
+
+> [!WARNING]
+> Editing `Menu.qml` is a local change to the plugin's git checkout. After that,
+> `omarchy plugin update` stops with "cannot fast-forward … you have local changes".
+> Put your edit aside first and re-apply it after the update:
+> `git -C ~/.config/omarchy/plugins/w3asd.quicknum stash`, then `omarchy plugin update w3asd.quicknum`,
+> then `git -C ~/.config/omarchy/plugins/w3asd.quicknum stash pop`.
 
 - `quickNumEnabled` (default `true`): turns number-key selection on or off.
 - `quickNumInSearch` (default `false`): with `false`, number keys select rows
@@ -118,11 +129,12 @@ manifest.json          Omarchy plugin manifest (clonedFrom: omarchy.menu)
 Menu.qml               Menu, based on Omarchy's built-in menu, plus QuickNum
 MenuModel.js           Unchanged copy of Omarchy's menu model (4.0.6)
 QuickNumIndicator.qml  Number badges
-BarWidget.qml          Optional bar button
+BarWidget.qml          Bar button, Omarchy's menu button pointed at QuickNum
 bin/install.sh         Local install script
 bin/omarchy-quicknum   CLI helper (toggle, summon, close, refresh, ping); run it from the repository, it is not installed to PATH
 tests/validate.sh      Manifest and syntax checks
-docs/                  Known issues, development notes, screenshot
+preview.png            Screenshot, also used by the Omarchy plugin marketplace
+docs/                  Known issues and development notes
 ```
 
 ## Documentation
@@ -134,5 +146,5 @@ docs/                  Known issues, development notes, screenshot
 
 ## License
 
-[MIT](LICENSE). `Menu.qml` and `MenuModel.js` are derived from
+[MIT](LICENSE). `Menu.qml`, `MenuModel.js` and `BarWidget.qml` are derived from
 [Omarchy](https://github.com/omacom/omarchy) (MIT, © David Heinemeier Hansson).

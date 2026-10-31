@@ -12,6 +12,23 @@ and the project uses [Semantic Versioning](https://semver.org/).
   replace the generic Omarchy badge. There is no separate Hyprland badge,
   because QuickNum needs Omarchy and does not run on plain Hyprland. The
   compatibility section now says so explicitly.
+- The screenshot moved from `docs/screenshot.png` to `preview.png` in the
+  repository root, where the Omarchy plugin marketplace looks for a preview.
+  The README credits the Shan Shui plugin for the background.
+
+### Fixed
+
+- Docs named the wrong shortcut: `Super + Space` opens the menu, and
+  `Super + Alt + Space` opens the Apps list directly (README, test checklist,
+  known issues, and the final message of `bin/install.sh`).
+- The README now warns that editing a setting in `Menu.qml` makes
+  `omarchy plugin update` stop with "cannot fast-forward", and shows how to keep the edit.
+- Known issues: the NumLock-at-startup problem no longer claims that QuickNum
+  cannot fix it; the 1.2.0 numpad workaround covers it inside the menu.
+- `LICENSE` and README also name `BarWidget.qml` as derived from Omarchy; it
+  is Omarchy's menu bar button with only the plugin id changed.
+- `docs/development.md` explains how to develop with an install made by
+  `omarchy plugin add`, which is a git clone.
 
 ## [2.0.0] - 2026-10-31
 

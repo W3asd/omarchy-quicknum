@@ -2,8 +2,8 @@ MIT License
 
 Copyright (c) 2026 W3asd
 
-Portions of this project (Menu.qml and MenuModel.js) are derived from the
-built-in menu plugin of Omarchy (https://github.com/omacom/omarchy):
+Portions of this project (Menu.qml, MenuModel.js and BarWidget.qml) are derived
+from the built-in menu plugin of Omarchy (https://github.com/omacom/omarchy):
 Copyright (c) David Heinemeier Hansson, licensed under the MIT License.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
