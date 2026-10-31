@@ -32,7 +32,7 @@ rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badg
 
 | Omarchy | Status |
 |---|---|
-| 4.0.6 | tested (1.1.0) |
+| 4.0.6 | tested (1.2.0) |
 | 4.0.x | expected to work; the Apps workaround is active ([details](docs/known-issues.md)) |
 | ≥ 4.5 | not tested yet; the upstream fix there should make the workaround inactive |
 
@@ -70,7 +70,7 @@ omarchy plugin enable omarchy.menu
 | Key | Action |
 | :--- | :--- |
 | `Super + Space` / `Super + Alt + Space` | Open / close the menu |
-| `1`–`9`, numpad `1`–`9` | Run row 1–9 (while the search is empty) |
+| `1`–`9`, numpad `1`–`9` | Run row 1–9 (while the search is empty); the numpad works even if NumLock is out of sync ([details](docs/known-issues.md#numpad-acts-as-if-numlock-were-off-after-hovering-a-window-worked-around)) |
 | `A`–`Z`, then also `0`–`9` | Search |
 | `Enter` | Run the selected row |
 | `Backspace` / `Left` | Up one level (when the search is empty) |
@@ -86,6 +86,9 @@ These properties are at the top of `Menu.qml`:
   only while the search is empty; once you type a letter, digits go into the
   search. With `true`, number keys always select.
 - `quickNumBadgeStyle` (default `"badge"`): `"badge"` or `"minimal"`.
+- `quickNumKeypadAlwaysDigits` (default `true`): numpad keys always count as
+  digits, even if NumLock is out of sync. Set it to `false` if you use the numpad
+  with NumLock off as arrow keys in the menu.
 
 ## Repository layout
 

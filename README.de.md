@@ -32,7 +32,7 @@ direkt mit den Zifferntasten `1`–`9` (oder dem Ziffernblock) auswählst. Recht
 
 | Omarchy | Stand |
 |---|---|
-| 4.0.6 | getestet (1.1.0) |
+| 4.0.6 | getestet (1.2.0) |
 | 4.0.x | sollte funktionieren; der Apps-Workaround ist aktiv ([Details](docs/known-issues.md)) |
 | ≥ 4.5 | noch nicht getestet; der dortige Fix in Omarchy sollte den Workaround überflüssig machen |
 
@@ -70,7 +70,7 @@ omarchy plugin enable omarchy.menu
 | Taste | Aktion |
 | :--- | :--- |
 | `Super + Leertaste` / `Super + Alt + Leertaste` | Menü öffnen / schließen |
-| `1`–`9`, Ziffernblock `1`–`9` | Eintrag 1–9 ausführen (solange die Suche leer ist) |
+| `1`–`9`, Ziffernblock `1`–`9` | Eintrag 1–9 ausführen (solange die Suche leer ist); der Ziffernblock funktioniert auch bei verstelltem Num-Lock ([Details](docs/known-issues.md#numpad-acts-as-if-numlock-were-off-after-hovering-a-window-worked-around)) |
 | `A`–`Z`, danach auch `0`–`9` | Suchen |
 | `Enter` | Markierten Eintrag ausführen |
 | `Rücktaste` / `Links` | Eine Ebene zurück (wenn die Suche leer ist) |
@@ -86,6 +86,9 @@ Diese Eigenschaften stehen oben in `Menu.qml`:
   solange die Suche leer ist. Sobald du einen Buchstaben tippst, landen Ziffern
   in der Suche. Bei `true` wählen die Zifferntasten immer aus.
 - `quickNumBadgeStyle` (Standard `"badge"`): `"badge"` oder `"minimal"`.
+- `quickNumKeypadAlwaysDigits` (Standard `true`): Ziffernblock-Tasten zählen immer
+  als Ziffern, auch bei verstelltem Num-Lock. Setze es auf `false`, wenn du den
+  Ziffernblock mit ausgeschaltetem Num-Lock als Pfeiltasten im Menü nutzt.
 
 ## Aufbau des Repositorys
 

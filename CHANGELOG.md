@@ -6,6 +6,26 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-31
+
+### Fixed
+
+- The numpad works in the menu even when Qt's NumLock state is out of sync,
+  for example after hovering another window. Numpad keys that arrive as
+  navigation keys are read as their digits
+  ([omacom/omarchy#8552](https://github.com/omacom/omarchy/issues/8552)).
+  Trade-off: with NumLock really off, the numpad no longer navigates the menu.
+
+### Added
+
+- Setting `quickNumKeypadAlwaysDigits` (default `true`) to turn the numpad
+  workaround off for people who navigate with the numpad arrows.
+
+### Changed
+
+- Number-key selection logic moved into `tryQuickNum()`, so the number row
+  and the numpad use the same rules.
+
 ## [1.1.0] - 2026-10-31
 
 ### Fixed
@@ -45,6 +65,7 @@ and the project uses [Semantic Versioning](https://semver.org/).
 - First release: menu overlay based on the built-in Omarchy menu, with
   direct selection via the number keys and numpad 1–9 and right-aligned number badges.
 
-[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/W3asd/omarchy-quicknum/releases/tag/v1.0.0

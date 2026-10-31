@@ -94,22 +94,37 @@ plugin cannot fix this.
 [#16298](https://github.com/omacom/omarchy/issues/16298),
 [#12438](https://github.com/omacom/omarchy/issues/12438) (after suspend/resume).
 
-## Numpad acts as if NumLock were off after hovering a window (under investigation)
+## Numpad acts as if NumLock were off after hovering a window (worked around)
 
 **Symptom (reported 2026-10-31, Omarchy 4.0.6):** while the menu is open, moving
 the mouse over another window, for example a terminal, makes the numpad behave as if
-NumLock were off. The number row keeps working.
+NumLock were off. The number row keeps working. The lock screen shows the same
+effect after the screen locks.
 
-**What is known:** QuickNum does not change how the menu takes the keyboard
-(`WlrKeyboardFocus.Exclusive`, as in the built-in menu). The symptom matches
-the NumLock desync between the compositor and Qt described in
-[omacom/omarchy#8176](https://github.com/omacom/omarchy/issues/8176) and
-[#15686](https://github.com/omacom/omarchy/issues/15686). No upstream issue
-reports exactly this hover trigger yet. A comparison with the built-in menu is
-limited, because the built-in menu ignores numpad digits anyway (#14956).
+**Cause (per the analysis in [omacom/omarchy#8552](https://github.com/omacom/omarchy/issues/8552)):**
+Hyprland sends a window a new keymap whenever input switches between two
+keyboards with different keymaps, for example the physical keyboard and the
+fcitx5 virtual keyboard. Qt then rebuilds its keyboard state, but no NumLock
+state follows, so Qt treats NumLock as off until NumLock is pressed. Omarchy's
+default `kb_options = "compose:caps,shift:both_capslock_cancel"` is what makes the
+two keymaps differ. QuickNum does not change how the menu takes the keyboard
+(`WlrKeyboardFocus.Exclusive`, as in the built-in menu).
 
-**Planned:** map the NumLock-off keypad keys (`End`, `Down`, `PageDown`, …) back to
-digits inside the menu, so numpad selection works regardless of the NumLock state.
+**Workaround in QuickNum (Unreleased):** inside the menu, numpad keys that arrive
+as navigation keys with Qt's `KeypadModifier` (`End`, `Down`, `PageDown`, `Left`,
+`Clear`, `Right`, `Home`, `Up`, `PageUp`, `Insert`) count as the digit printed
+on them. They select a row or type into the search like any other digit.
+Omarchy uses the same approach in its open PRs for the lock screen (#12667)
+and the polkit dialog (#10530).
+
+**Trade-off:** with NumLock *really* off, the numpad can no longer navigate the
+menu; the regular arrow keys and `PageUp`/`PageDown` still do. Set
+`quickNumKeypadAlwaysDigits: false` in `Menu.qml` to turn the workaround off.
+The numpad decimal key (`Delete` when NumLock is off) is not mapped.
+
+**System-side fix (not applied by QuickNum):** removing `shift:both_capslock_cancel`
+from `kb_options` in `~/.config/hypr/input.lua` makes the keymaps identical.
+Users report that this helps, but not always when several keyboards use different layouts.
 
 ## Overview: Omarchy issues that affect QuickNum
 
@@ -118,7 +133,7 @@ digits inside the menu, so numpad selection works regardless of the NumLock stat
 | Third-party menus get `appLibrary: null`, Apps list empty | [#15617](https://github.com/omacom/omarchy/issues/15617) → #10661, fix [#13439](https://github.com/omacom/omarchy/pull/13439) | fixed for v4.5.0-rc1 | worked around (AppLibrary fallback) |
 | Numpad digits are dropped by the menu's modifier check | [#14956](https://github.com/omacom/omarchy/issues/14956) | fixed for v4.5.0-rc1 (#15508) | fixed in `Menu.qml` |
 | Qt ignores NumLock at startup | [#8552](https://github.com/omacom/omarchy/issues/8552), [#8176](https://github.com/omacom/omarchy/issues/8176) | open | not fixable; toggle NumLock |
-| NumLock state lost after hovering another window | none found yet; related #8176, #15686 | — | under investigation |
+| NumLock state lost when the keymap is re-sent (hover, lock screen) | [#8552](https://github.com/omacom/omarchy/issues/8552) (analysis in comments), lock screen PR #12667, polkit PR #10530 | open | worked around in the menu |
 
 The upstream status comes from replies in the Omarchy issue threads, mostly
 from the `omarchybot` account. It was not verified by running Omarchy 4.5.

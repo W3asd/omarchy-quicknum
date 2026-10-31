@@ -66,6 +66,7 @@ in that case run `omarchy restart shell`. Shell log: `journalctl --user -b | gre
 - [ ] `Super + Alt + Space` opens the menu; badges 1–9 are right-aligned
 - [ ] Number keys and numpad keys 1–9 run the matching row (empty search)
 - [ ] After typing a letter, number-row and numpad digits are added to the search
+- [ ] Numpad still selects after hovering another window with the mouse (NumLock desync)
 - [ ] **Apps** lists the installed applications, with icons
 - [ ] Searching from the root menu finds applications
 - [ ] Launching an app from the menu works

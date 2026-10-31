@@ -70,6 +70,10 @@ Item {
   // selecting a row (number row and numpad alike).
   property bool quickNumInSearch: false
   property string quickNumBadgeStyle: "badge" // "badge" or "minimal"
+  // true: numpad keys always count as digits, even when they arrive as
+  // navigation keys (NumLock desync, see keypadDigitText). false: a numpad
+  // with NumLock off navigates the menu like the arrow keys.
+  property bool quickNumKeypadAlwaysDigits: true
   property string activeMenu: "root"
   property string filterText: ""
   property int selectedIndex: 0
@@ -749,6 +753,41 @@ Item {
     return -1
   }
 
+  // QuickNum: when Qt's NumLock state is out of sync with the compositor
+  // (omacom/omarchy#8552, #8176; see docs/known-issues.md), numpad keys arrive
+  // as navigation keys that still carry KeypadModifier. Read them as the digit
+  // printed on the key. Trade-off: with NumLock really off, the numpad cannot
+  // navigate the menu; the regular arrow keys still do. Switched off with
+  // quickNumKeypadAlwaysDigits.
+  function keypadDigitText(event) {
+    if (!root.quickNumKeypadAlwaysDigits) return ""
+    if (!(event.modifiers & Qt.KeypadModifier)) return ""
+    if (event.modifiers & (Qt.ControlModifier | Qt.AltModifier | Qt.MetaModifier)) return ""
+    switch (event.key) {
+    case Qt.Key_Insert: return "0"
+    case Qt.Key_End: return "1"
+    case Qt.Key_Down: return "2"
+    case Qt.Key_PageDown: return "3"
+    case Qt.Key_Left: return "4"
+    case Qt.Key_Clear: return "5"
+    case Qt.Key_Right: return "6"
+    case Qt.Key_Home: return "7"
+    case Qt.Key_Up: return "8"
+    case Qt.Key_PageUp: return "9"
+    }
+    return ""
+  }
+
+  // Runs row `index` if QuickNum may select right now; returns whether it did.
+  function tryQuickNum(index) {
+    if (!root.quickNumEnabled || index < 0 || index >= displayModel.count) return false
+    if (root.filterText && !root.quickNumInSearch) return false
+    root.cursorActive = true
+    root.selectedIndex = index
+    root.activateIndex(index)
+    return true
+  }
+
   function activateIndex(index, fromPointer) {
     if (root.deleteConfirmOpen) return
     if (root.dmenuActive) {
@@ -1121,6 +1160,16 @@ Item {
             return
           }
 
+          // QuickNum: handle desynced numpad keys before the navigation
+          // branches below claim them as Up, Down, Left, Right, PageUp, ...
+          var keypadText = root.keypadDigitText(event)
+          if (keypadText) {
+            if (!root.tryQuickNum(parseInt(keypadText, 10) - 1))
+              root.setFilter(root.filterText + keypadText)
+            event.accepted = true
+            return
+          }
+
           if (event.key === Qt.Key_Delete) {
             root.requestDeleteSelected()
             event.accepted = true
@@ -1155,16 +1204,7 @@ Item {
             event.accepted = true
           } else {
             // QuickNum: Direct numeric key & numpad selection (1-9)
-            var qIndex = root.getQuickNumIndex(event)
-            var canTriggerQuickNum = root.quickNumEnabled &&
-                                     qIndex >= 0 &&
-                                     qIndex < displayModel.count &&
-                                     (!root.filterText || root.quickNumInSearch)
-
-            if (canTriggerQuickNum) {
-              root.cursorActive = true
-              root.selectedIndex = qIndex
-              root.activateIndex(qIndex)
+            if (root.tryQuickNum(root.getQuickNumIndex(event))) {
               event.accepted = true
               return
             }
