@@ -84,8 +84,10 @@ diff /usr/share/omarchy/shell/plugins/menu/Menu.qml Menu.qml
 
 Expected differences in `Menu.qml` (as of Omarchy 4.0.6):
 
-- QuickNum properties, `getQuickNumIndex()`, the number-key branch in
-  `Keys.onPressed` and the `QuickNumIndicator` in the row delegate
+- QuickNum properties, `getQuickNumIndex()`, `keypadDigitText()`, `tryQuickNum()`,
+  the numpad branch at the top of `Keys.onPressed`, the number-key branch at its end,
+  and the `QuickNumIndicator` in the row delegate
+- the text branch of `Keys.onPressed` ignores `Qt.KeypadModifier` (omacom/omarchy#14956)
 - card width `320` instead of `300`, and the chevron row layout next to the badge
 - the AppLibrary fallback (comment `Workaround`, see [known-issues.md](known-issues.md))
 

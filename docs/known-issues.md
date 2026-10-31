@@ -2,7 +2,7 @@
 
 ## Empty "Apps" submenu on Omarchy 4.0.x (worked around)
 
-**Status:** worked around in QuickNum (see [CHANGELOG](../CHANGELOG.md), Unreleased).
+**Status:** worked around in QuickNum 1.1.0 (see [CHANGELOG](../CHANGELOG.md)).
 Fixed upstream in Omarchy v4.5.0-rc1, according to the Omarchy project's bot
 account. A maintainer has not confirmed this yet.
 
@@ -69,7 +69,7 @@ were never typed at all: the menu only accepts typed text without modifiers,
 and numpad keys carry Qt's `KeypadModifier`. The built-in Omarchy menu has the
 same bug ([omacom/omarchy#14956](https://github.com/omacom/omarchy/issues/14956)).
 
-Since the Unreleased version, `quickNumInSearch` defaults to `false`: as soon
+Since 1.1.0, `quickNumInSearch` defaults to `false`: as soon
 as a search contains text, every digit (number row and numpad) is typed into it.
 A search still cannot *start* with a digit, because on an empty search
 `1`–`9` select a row.
@@ -110,7 +110,7 @@ default `kb_options = "compose:caps,shift:both_capslock_cancel"` is what makes t
 two keymaps differ. QuickNum does not change how the menu takes the keyboard
 (`WlrKeyboardFocus.Exclusive`, as in the built-in menu).
 
-**Workaround in QuickNum (Unreleased):** inside the menu, numpad keys that arrive
+**Workaround in QuickNum 1.2.0:** inside the menu, numpad keys that arrive
 as navigation keys with Qt's `KeypadModifier` (`End`, `Down`, `PageDown`, `Left`,
 `Clear`, `Right`, `Home`, `Up`, `PageUp`, `Insert`) count as the digit printed
 on them. They select a row or type into the search like any other digit.
