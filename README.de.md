@@ -46,24 +46,34 @@ Ziffernblock, der nichts tippt, bis Num-Lock einmal aus- und wieder eingeschalte
 omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
 ```
 
-Prüfe den Code. Danach wechselst du vom eingebauten Menü zu QuickNum. Es sollte nur ein Menü-Plugin aktiv sein:
+Prüfe den Code und schalte QuickNum dann ein. Dabei wird das eingebaute
+`omarchy.menu` automatisch ausgeschaltet, und QuickNum übernimmt seinen Platz in der Leiste (getestet mit Omarchy 4.0.6):
 
 ```bash
-omarchy plugin disable omarchy.menu
-omarchy plugin enable quicknum
+omarchy plugin enable w3asd.quicknum
 ```
 
-Manuell: Klone das Repository nach `~/.config/omarchy/plugins/quicknum` und
+Manuell: Klone das Repository nach `~/.config/omarchy/plugins/w3asd.quicknum` und
 führe dann `omarchy-shell shell rescanPlugins` aus. Alternativ startest du im Repository `./bin/install.sh`.
+
+## Upgrade von 1.x
+
+In Version 2.0 heißt die Plugin-ID nicht mehr `quicknum`, sondern `w3asd.quicknum`. Entferne die alte Installation und installiere neu:
+
+```bash
+omarchy plugin disable quicknum
+omarchy plugin remove quicknum
+omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
+omarchy plugin enable w3asd.quicknum
+```
 
 ## Deinstallieren / zurück zum eingebauten Menü
 
 ```bash
-omarchy plugin disable quicknum
-omarchy plugin enable omarchy.menu
+omarchy plugin disable w3asd.quicknum
 ```
 
-`omarchy plugin remove quicknum` löscht zusätzlich die Dateien.
+Dabei schaltet sich das eingebaute `omarchy.menu` wieder ein. `omarchy plugin remove w3asd.quicknum` löscht zusätzlich die Dateien.
 
 ## Tasten
 
@@ -99,8 +109,8 @@ MenuModel.js           Unveränderte Kopie des Omarchy-Menümodells (4.0.6)
 QuickNumIndicator.qml  Nummern-Abzeichen
 BarWidget.qml          Optionaler Knopf in der Leiste
 bin/install.sh         Lokales Installationsskript
-bin/omarchy-quicknum   Kommandozeilen-Helfer (toggle, summon, close, refresh, ping); wird nicht in den PATH installiert
-hypr/quicknum.lua      Beispiel-Tastenkürzel (nur Vorlage, tut selbst nichts)
+bin/omarchy-quicknum   Kommandozeilen-Helfer (toggle, summon, close, refresh, ping); aus dem Repository starten, wird nicht in den PATH installiert
+examples/              Optionale Hyprland-Tastenkürzel (nicht nötig)
 tests/validate.sh      Prüft Manifest und Syntax
 docs/                  Bekannte Probleme und Entwicklungshinweise (Englisch)
 ```

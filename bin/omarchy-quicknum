@@ -15,16 +15,16 @@ menu_payload() {
 
 case "$verb" in
   toggle)
-    exec omarchy-shell shell toggle quicknum "$(menu_payload "$route")"
+    exec omarchy-shell shell toggle w3asd.quicknum "$(menu_payload "$route")"
     ;;
   summon)
-    exec omarchy-shell shell summon quicknum "$(menu_payload "$route")"
+    exec omarchy-shell shell summon w3asd.quicknum "$(menu_payload "$route")"
     ;;
   close)
-    exec omarchy-shell shell hide quicknum
+    exec omarchy-shell shell hide w3asd.quicknum
     ;;
   refresh | ping)
-    exec omarchy-shell shell call quicknum "$verb" "{}"
+    exec omarchy-shell shell call w3asd.quicknum "$verb" "{}"
     ;;
   -h | --help | help)
     cat <<USAGE

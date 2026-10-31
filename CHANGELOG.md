@@ -6,6 +6,19 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking:** the plugin id is now `w3asd.quicknum` instead of `quicknum`.
+  The Omarchy docs recommend a personal prefix so that plugin ids from different
+  authors cannot collide. Commands, the bar widget and the install folder use
+  the new id. To upgrade an existing install, see "Upgrading from 1.x" in the README.
+- `bin/install.sh` reads the id from `manifest.json` and reports errors instead
+  of claiming success. It refuses to overwrite a checkout made by
+  `omarchy plugin add` and hints when `omarchy.menu` is still enabled.
+- `hypr/quicknum.lua` (a Lua module that did nothing) is replaced by
+  `examples/hyprland-bindings.lua`, a plain comment file.
+- `.gitignore` no longer lists Python files.
+
 ## [1.2.0] - 2026-10-31
 
 ### Fixed

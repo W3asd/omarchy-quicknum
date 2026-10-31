@@ -46,24 +46,34 @@ list them with links to the Omarchy issues.
 omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
 ```
 
-Review the code, then switch from the built-in menu to QuickNum. Only one menu plugin should be active:
+Review the code, then enable QuickNum. Enabling it switches off the built-in
+`omarchy.menu` and takes over its place in the bar (tested on Omarchy 4.0.6):
 
 ```bash
-omarchy plugin disable omarchy.menu
-omarchy plugin enable quicknum
+omarchy plugin enable w3asd.quicknum
 ```
 
-Manual alternative: clone the repository to `~/.config/omarchy/plugins/quicknum`
+Manual alternative: clone the repository to `~/.config/omarchy/plugins/w3asd.quicknum`
 and run `omarchy-shell shell rescanPlugins`, or run `./bin/install.sh` from the repository.
+
+## Upgrading from 1.x
+
+Version 2.0 renamed the plugin id from `quicknum` to `w3asd.quicknum`. Remove the old install, then install again:
+
+```bash
+omarchy plugin disable quicknum
+omarchy plugin remove quicknum
+omarchy plugin add https://github.com/W3asd/omarchy-quicknum.git
+omarchy plugin enable w3asd.quicknum
+```
 
 ## Uninstall / back to the built-in menu
 
 ```bash
-omarchy plugin disable quicknum
-omarchy plugin enable omarchy.menu
+omarchy plugin disable w3asd.quicknum
 ```
 
-`omarchy plugin remove quicknum` also deletes the files.
+This switches the built-in `omarchy.menu` back on. `omarchy plugin remove w3asd.quicknum` also deletes the files.
 
 ## Keys
 
@@ -99,8 +109,8 @@ MenuModel.js           Unchanged copy of Omarchy's menu model (4.0.6)
 QuickNumIndicator.qml  Number badges
 BarWidget.qml          Optional bar button
 bin/install.sh         Local install script
-bin/omarchy-quicknum   CLI helper (toggle, summon, close, refresh, ping); not installed to PATH
-hypr/quicknum.lua      Example keybindings (template only, does nothing by itself)
+bin/omarchy-quicknum   CLI helper (toggle, summon, close, refresh, ping); run it from the repository, it is not installed to PATH
+examples/              Optional Hyprland keybindings (not needed)
 tests/validate.sh      Manifest and syntax checks
 docs/                  Known issues and development notes
 ```
