@@ -6,6 +6,8 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-31
+
 ### Fixed
 
 - **Apps** submenu and application search were empty on Omarchy 4.0.x.
@@ -15,8 +17,15 @@ and the project uses [Semantic Versioning](https://semver.org/).
   host provides none. Details: [docs/known-issues.md](docs/known-issues.md).
   Tested on Omarchy 4.0.6-1: 0 → 55 app rows.
 
+- Digits can now be typed into a running search, from the number row and
+  the numpad. Before, `1`–`9` always selected a row, and numpad digits never
+  reached the search.
+
 ### Changed
 
+- `quickNumInSearch` now defaults to `false`: number keys select rows only
+  while the search is empty. The special case that let the numpad select during
+  a search was removed.
 - `manifest.json`: author is now `W3asd` instead of
   "Omarchy Community"; descriptions are in English.
 - `LICENSE`: added the copyright notice of Omarchy, from which `Menu.qml` and
@@ -35,3 +44,7 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 - First release: menu overlay based on the built-in Omarchy menu, with
   direct selection via the number keys and numpad 1–9 and right-aligned number badges.
+
+[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/W3asd/omarchy-quicknum/releases/tag/v1.0.0

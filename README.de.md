@@ -22,7 +22,8 @@ direkt mit den Zifferntasten `1`–`9` (oder dem Ziffernblock) auswählst. Recht
 - **Zifferntasten und Ziffernblock `1`–`9`** führen den passenden Eintrag sofort
   aus. So kommst du schnell durch verschachtelte Menüs (z. B. `3` → `1`).
 - **Rechtsbündige Abzeichen:** Lange Titel werden mit `…` gekürzt, damit die Abzeichen immer in einer Linie stehen.
-- **Suche wie gewohnt:** Buchstaben filtern die Liste, und die Nummern passen sich den Treffern an.
+- **Suche wie gewohnt:** Tippen filtert die Liste, und die Nummern passen sich den Treffern an.
+  Sobald die Suche begonnen hat, landen Ziffern in der Suche.
 - **Direkter Ersatz:** Das Manifest enthält `clonedFrom: "omarchy.menu"`.
   Bestehende Tastenkürzel (`Super + Leertaste`, `Super + Alt + Leertaste`)
   öffnen QuickNum, ohne dass du die Konfiguration änderst.
@@ -31,9 +32,13 @@ direkt mit den Zifferntasten `1`–`9` (oder dem Ziffernblock) auswählst. Recht
 
 | Omarchy | Stand |
 |---|---|
-| 4.0.6 | getestet |
+| 4.0.6 | getestet (1.1.0) |
 | 4.0.x | sollte funktionieren; der Apps-Workaround ist aktiv ([Details](docs/known-issues.md)) |
 | ≥ 4.5 | noch nicht getestet; der dortige Fix in Omarchy sollte den Workaround überflüssig machen |
+
+Manche Probleme kommen von Omarchy selbst, nicht von QuickNum: die leere App-Liste unter 4.0.x und ein
+Ziffernblock, der nichts tippt, bis Num-Lock einmal aus- und wieder eingeschaltet wird. Die [bekannten Probleme](docs/known-issues.md#overview-omarchy-issues-that-affect-quicknum)
+(Englisch) listen sie mit Links zu den Omarchy-Issues auf.
 
 ## Installation
 
@@ -65,8 +70,8 @@ omarchy plugin enable omarchy.menu
 | Taste | Aktion |
 | :--- | :--- |
 | `Super + Leertaste` / `Super + Alt + Leertaste` | Menü öffnen / schließen |
-| `1`–`9`, Ziffernblock `1`–`9` | Eintrag 1–9 ausführen |
-| `A`–`Z` | Suchen |
+| `1`–`9`, Ziffernblock `1`–`9` | Eintrag 1–9 ausführen (solange die Suche leer ist) |
+| `A`–`Z`, danach auch `0`–`9` | Suchen |
 | `Enter` | Markierten Eintrag ausführen |
 | `Rücktaste` / `Links` | Eine Ebene zurück (wenn die Suche leer ist) |
 | `Esc` | Suche leeren, danach Menü schließen |
@@ -77,8 +82,9 @@ omarchy plugin enable omarchy.menu
 Diese Eigenschaften stehen oben in `Menu.qml`:
 
 - `quickNumEnabled` (Standard `true`): Ziffernauswahl an oder aus.
-- `quickNumInSearch` (Standard `true`): Die Zifferntasten wählen auch während
-  einer Suche aus. Mit `false` kannst du Ziffern in die Suche tippen ([Grund](docs/known-issues.md#digits-cannot-be-typed-into-the-search-open)).
+- `quickNumInSearch` (Standard `false`): Bei `false` wählen die Zifferntasten nur,
+  solange die Suche leer ist. Sobald du einen Buchstaben tippst, landen Ziffern
+  in der Suche. Bei `true` wählen die Zifferntasten immer aus.
 - `quickNumBadgeStyle` (Standard `"badge"`): `"badge"` oder `"minimal"`.
 
 ## Aufbau des Repositorys

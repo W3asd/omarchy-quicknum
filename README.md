@@ -22,7 +22,8 @@ rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badg
 - **Number keys and numpad `1`–`9`** run the matching row immediately, so you
   can step through nested menus quickly (e.g. `3` → `1`).
 - **Right-aligned badges:** long titles are truncated with `…`, so the badges always line up.
-- **Search as usual:** typing letters filters the list, and the numbers follow the results.
+- **Search as usual:** typing filters the list, and the badges follow the results.
+  Once a search has started, digits are typed into it.
 - **Drop-in replacement:** the manifest declares `clonedFrom: "omarchy.menu"`,
   so existing shortcuts (`Super + Space`, `Super + Alt + Space`) open QuickNum
   without any config changes.
@@ -31,9 +32,13 @@ rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badg
 
 | Omarchy | Status |
 |---|---|
-| 4.0.6 | tested |
+| 4.0.6 | tested (1.1.0) |
 | 4.0.x | expected to work; the Apps workaround is active ([details](docs/known-issues.md)) |
 | ≥ 4.5 | not tested yet; the upstream fix there should make the workaround inactive |
+
+Some problems come from Omarchy itself, not from QuickNum: the empty Apps list on 4.0.x, and a numpad that
+types nothing until NumLock is toggled. The [known issues](docs/known-issues.md#overview-omarchy-issues-that-affect-quicknum)
+list them with links to the Omarchy issues.
 
 ## Installation
 
@@ -65,8 +70,8 @@ omarchy plugin enable omarchy.menu
 | Key | Action |
 | :--- | :--- |
 | `Super + Space` / `Super + Alt + Space` | Open / close the menu |
-| `1`–`9`, numpad `1`–`9` | Run row 1–9 |
-| `A`–`Z` | Search |
+| `1`–`9`, numpad `1`–`9` | Run row 1–9 (while the search is empty) |
+| `A`–`Z`, then also `0`–`9` | Search |
 | `Enter` | Run the selected row |
 | `Backspace` / `Left` | Up one level (when the search is empty) |
 | `Esc` | Clear the search, then close the menu |
@@ -77,8 +82,9 @@ omarchy plugin enable omarchy.menu
 These properties are at the top of `Menu.qml`:
 
 - `quickNumEnabled` (default `true`): turns number-key selection on or off.
-- `quickNumInSearch` (default `true`): the number row selects even during a
-  search. Set it to `false` to type digits into a search ([why](docs/known-issues.md#digits-cannot-be-typed-into-the-search-open)).
+- `quickNumInSearch` (default `false`): with `false`, number keys select rows
+  only while the search is empty; once you type a letter, digits go into the
+  search. With `true`, number keys always select.
 - `quickNumBadgeStyle` (default `"badge"`): `"badge"` or `"minimal"`.
 
 ## Repository layout

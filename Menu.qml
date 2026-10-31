@@ -66,7 +66,9 @@ Item {
 
   // QuickNum configuration
   property bool quickNumEnabled: true
-  property bool quickNumInSearch: true
+  // false: once a search has started, digits are typed into it instead of
+  // selecting a row (number row and numpad alike).
+  property bool quickNumInSearch: false
   property string quickNumBadgeStyle: "badge" // "badge" or "minimal"
   property string activeMenu: "root"
   property string filterText: ""
@@ -1154,11 +1156,10 @@ Item {
           } else {
             // QuickNum: Direct numeric key & numpad selection (1-9)
             var qIndex = root.getQuickNumIndex(event)
-            var isKeypad = (event.modifiers & 0x20000000) !== 0
             var canTriggerQuickNum = root.quickNumEnabled &&
                                      qIndex >= 0 &&
                                      qIndex < displayModel.count &&
-                                     (!root.filterText || isKeypad || root.quickNumInSearch)
+                                     (!root.filterText || root.quickNumInSearch)
 
             if (canTriggerQuickNum) {
               root.cursorActive = true
@@ -1168,7 +1169,10 @@ Item {
               return
             }
 
-            if (event.text && event.text.length === 1 && event.text.charCodeAt(0) >= 32 && event.text.charCodeAt(0) !== 127 && (event.modifiers === Qt.NoModifier || event.modifiers === Qt.ShiftModifier)) {
+            // QuickNum: numpad keys carry KeypadModifier; ignore it so numpad
+            // digits can be typed into the search like number-row digits.
+            var textModifiers = event.modifiers & ~Qt.KeypadModifier
+            if (event.text && event.text.length === 1 && event.text.charCodeAt(0) >= 32 && event.text.charCodeAt(0) !== 127 && (textModifiers === Qt.NoModifier || textModifiers === Qt.ShiftModifier)) {
               root.setFilter(root.filterText + event.text)
               event.accepted = true
             }
