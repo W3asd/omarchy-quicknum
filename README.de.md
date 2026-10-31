@@ -10,6 +10,8 @@
 eingebaute Omarchy-Menü durch eine Fassung, in der du die ersten neun Einträge
 direkt mit den Zifferntasten `1`–`9` (oder dem Ziffernblock) auswählst. Rechtsbündige Abzeichen zeigen die Nummern an.
 
+![QuickNum-Menü mit Nummern-Abzeichen 1–9](docs/screenshot.png)
+
 > [!NOTE]
 > <a id="ki-generiert"></a>**Dieses Projekt ist komplett KI-generiert.** Die erste Fassung entstand mit
 > Google Antigravity. Fehlerbehebungen und Dokumentation entstanden mit Claude Code
@@ -87,6 +89,10 @@ Dabei schaltet sich das eingebaute `omarchy.menu` wieder ein. `omarchy plugin re
 | `Esc` | Suche leeren, danach Menü schließen |
 | `Hoch` / `Runter` | Auswahl verschieben |
 
+Die bestehenden Omarchy-Tastenkürzel öffnen QuickNum, weil das Manifest
+`clonedFrom: "omarchy.menu"` enthält. Für eine eigene Taste rufst du in
+`~/.config/hypr/bindings.lua` `omarchy-shell shell toggle w3asd.quicknum '{"menu":"root"}'` auf.
+
 ## Einstellungen
 
 Diese Eigenschaften stehen oben in `Menu.qml`:
@@ -110,9 +116,8 @@ QuickNumIndicator.qml  Nummern-Abzeichen
 BarWidget.qml          Optionaler Knopf in der Leiste
 bin/install.sh         Lokales Installationsskript
 bin/omarchy-quicknum   Kommandozeilen-Helfer (toggle, summon, close, refresh, ping); aus dem Repository starten, wird nicht in den PATH installiert
-examples/              Optionale Hyprland-Tastenkürzel (nicht nötig)
 tests/validate.sh      Prüft Manifest und Syntax
-docs/                  Bekannte Probleme und Entwicklungshinweise (Englisch)
+docs/                  Bekannte Probleme, Entwicklungshinweise (Englisch), Screenshot
 ```
 
 ## Dokumentation (Englisch)

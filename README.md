@@ -10,6 +10,8 @@
 built-in Omarchy menu with a version where you choose each of the first nine
 rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badges show the numbers.
 
+![QuickNum menu with number badges 1–9](docs/screenshot.png)
+
 > [!NOTE]
 > <a id="ai-generated"></a>**This project is fully AI-generated.** The first version was created with
 > Google Antigravity. Bug fixes and documentation were done with Claude Code
@@ -87,6 +89,10 @@ This switches the built-in `omarchy.menu` back on. `omarchy plugin remove w3asd.
 | `Esc` | Clear the search, then close the menu |
 | `Up` / `Down` | Move the selection |
 
+The existing Omarchy shortcuts open QuickNum, because its manifest declares
+`clonedFrom: "omarchy.menu"`. To bind it to another key anyway, call
+`omarchy-shell shell toggle w3asd.quicknum '{"menu":"root"}'` from `~/.config/hypr/bindings.lua`.
+
 ## Settings
 
 These properties are at the top of `Menu.qml`:
@@ -110,9 +116,8 @@ QuickNumIndicator.qml  Number badges
 BarWidget.qml          Optional bar button
 bin/install.sh         Local install script
 bin/omarchy-quicknum   CLI helper (toggle, summon, close, refresh, ping); run it from the repository, it is not installed to PATH
-examples/              Optional Hyprland keybindings (not needed)
 tests/validate.sh      Manifest and syntax checks
-docs/                  Known issues and development notes
+docs/                  Known issues, development notes, screenshot
 ```
 
 ## Documentation

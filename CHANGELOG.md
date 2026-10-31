@@ -6,6 +6,10 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Screenshot in the README (`docs/screenshot.png`).
+
 ### Changed
 
 - **Breaking:** the plugin id is now `w3asd.quicknum` instead of `quicknum`.
@@ -15,8 +19,8 @@ and the project uses [Semantic Versioning](https://semver.org/).
 - `bin/install.sh` reads the id from `manifest.json` and reports errors instead
   of claiming success. It refuses to overwrite a checkout made by
   `omarchy plugin add` and hints when `omarchy.menu` is still enabled.
-- `hypr/quicknum.lua` (a Lua module that did nothing) is replaced by
-  `examples/hyprland-bindings.lua`, a plain comment file.
+- Removed `hypr/quicknum.lua`, a Lua module that did nothing. The README
+  explains how to bind QuickNum to a custom key.
 - `.gitignore` no longer lists Python files.
 
 ## [1.2.0] - 2026-10-31
