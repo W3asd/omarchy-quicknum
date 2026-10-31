@@ -6,9 +6,12 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-31
+
 ### Added
 
 - Screenshot in the README (`docs/screenshot.png`).
+- Release badge in the README.
 
 ### Changed
 
@@ -82,7 +85,8 @@ and the project uses [Semantic Versioning](https://semver.org/).
 - First release: menu overlay based on the built-in Omarchy menu, with
   direct selection via the number keys and numpad 1–9 and right-aligned number badges.
 
-[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/W3asd/omarchy-quicknum/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/W3asd/omarchy-quicknum/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/W3asd/omarchy-quicknum/releases/tag/v1.0.0

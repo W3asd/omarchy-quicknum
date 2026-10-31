@@ -3,6 +3,7 @@
 **Deutsch** · [English](README.md)
 
 [![Omarchy Plugin](https://img.shields.io/badge/Omarchy-plugin-blue?style=flat-square)](https://omarchy.org)
+[![Release](https://img.shields.io/github/v/release/W3asd/omarchy-quicknum?style=flat-square)](https://github.com/W3asd/omarchy-quicknum/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![KI-generiert](https://img.shields.io/badge/code-KI--generiert-lightgrey?style=flat-square)](#ki-generiert)
 
@@ -34,7 +35,7 @@ direkt mit den Zifferntasten `1`–`9` (oder dem Ziffernblock) auswählst. Recht
 
 | Omarchy | Stand |
 |---|---|
-| 4.0.6 | getestet (1.2.0) |
+| 4.0.6 | getestet (2.0.0) |
 | 4.0.x | sollte funktionieren; der Apps-Workaround ist aktiv ([Details](docs/known-issues.md)) |
 | ≥ 4.5 | noch nicht getestet; der dortige Fix in Omarchy sollte den Workaround überflüssig machen |
 

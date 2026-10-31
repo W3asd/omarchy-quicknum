@@ -3,6 +3,7 @@
 [Deutsch](README.de.md) · **English**
 
 [![Omarchy Plugin](https://img.shields.io/badge/Omarchy-plugin-blue?style=flat-square)](https://omarchy.org)
+[![Release](https://img.shields.io/github/v/release/W3asd/omarchy-quicknum?style=flat-square)](https://github.com/W3asd/omarchy-quicknum/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![AI-generated](https://img.shields.io/badge/code-AI--generated-lightgrey?style=flat-square)](#ai-generated)
 
@@ -34,7 +35,7 @@ rows directly with the number keys `1`–`9` (or the numpad). Right-aligned badg
 
 | Omarchy | Status |
 |---|---|
-| 4.0.6 | tested (1.2.0) |
+| 4.0.6 | tested (2.0.0) |
 | 4.0.x | expected to work; the Apps workaround is active ([details](docs/known-issues.md)) |
 | ≥ 4.5 | not tested yet; the upstream fix there should make the workaround inactive |
 
